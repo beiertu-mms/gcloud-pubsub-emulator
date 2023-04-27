@@ -15,7 +15,8 @@ COPY --from=builder /usr/bin/wait-for /usr/bin
 COPY --from=builder /go/bin/pubsubc   /usr/bin
 COPY                run.sh            /run.sh
 
-RUN apk --update add openjdk8-jre netcat-openbsd gcompat && gcloud components install beta pubsub-emulator
+RUN apk --update add --no-cache openjdk17-jre netcat-openbsd gcompat \
+    && gcloud components install beta pubsub-emulator
 
 ENV LD_PRELOAD=/lib/libgcompat.so.0
 
