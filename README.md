@@ -1,59 +1,112 @@
-gcloud-pubsub-emulator
-----------------------
-This repository contains the Docker configuration for Google's PubSub emulator. It's mainly the dockerization and documentation of https://github.com/prep/pubsubc 
+# gcloud-pubsub-emulator
 
-Installation
-------------
-A pre-built Docker container is available for Docker Hub:
+This repository contains the Docker configuration for Google's PubSub emulator.
+It's mainly the dockerization and documentation of [prep/pubsubc](https://github.com/prep/pubsubc).
 
-```
-docker run --rm -ti -p 8681:8681 messagebird/gcloud-pubsub-emulator:latest
-```
+This is a fork of [marcelcorso/gcloud-pubsub-emulator](https://github.com/marcelcorso/gcloud-pubsub-emulator),
+with updated versions of [gcloud](https://cloud.google.com/sdk/gcloud), [OpenJDK](https://openjdk.org) and [eficode/wait-for](https://github.com/eficode/wait-for).
 
-Or, you can build this repository yourself:
+The source code can be found in [this Github repository](https://github.com/beiertu-mms/gcloud-pubsub-emulator).
 
-```
-docker build -t gcloud-pubsub-emulator:latest .
-docker run --rm -ti -p 8681:8681 gcloud-pubsub-emulator:latest
-```
+## Supported tags
 
-Usage
------
-After you've ran the above-mentioned `docker run` command, you should be able to use any app that has PubSub implemented and point it to your Docker container by specifying the `PUBSUB_EMULATOR_HOST` environment variable.
+- `latest`: latest version of the image with the [last published gcloud version][google-release-note]
+- `\d+.\d+.\d+`: the build for a [given gcloud version][google-release-note]
 
-```
-env PUBSUB_EMULATOR_HOST=localhost:8681 ./myapp
+[google-release-note]: https://cloud.google.com/release-notes
+
+## Usage
+
+To run this image:
+
+```shell
+docker run -d -p 8681:8681 -e PUBSUB_PROJECT1=test-project,test-topic tungbeier/gcloud-pubsub-emulator:latest
 ```
 
-or
+Or, with [docker-compose](https://docs.docker.com/compose/), first create a `docker-compose.yaml`
 
+```yaml
+---
+services:
+  pubsub-emulator:
+    image: tungbeier/gcloud-pubsub-emulator:latest
+    container_name: pubsub-emulator
+    expose:
+      - "8681"
+      - "8682"
+    ports:
+      - "8681:8681"
+      - "8682:8682"
+    environment:
+      - PUBSUB_PROJECT1=test-project,test-topic
 ```
+
+then run
+
+```shell
+docker-compose up -d
+```
+
+After the container has started, the `PUBSUB_EMULATOR_HOST` environment variable needs to be set before running any application, either with
+
+```shell
 export PUBSUB_EMULATOR_HOST=localhost:8681
-./myapp
+./my-pubsub-app
 ```
 
-### Automatic topic and subscription creation
-This image also provides the ability to create topics and subscriptions in projects on startup by specifying the `PUBSUB_PROJECT` environment variable with a sequentual number appended to it, starting with _1_. The format of the environment variable is relatively simple:
+or run the application with the environment variable
 
+```shell
+env PUBSUB_EMULATOR_HOST=localhost:8681 ./my-pubsub-app
 ```
-PROJECTID,TOPIC1,TOPIC2:SUBSCRIPTION1:SUBSCRIPTION2,TOPIC3:SUBSCRIPTION3
+
+### Change emulator ports
+
+If desired, the emulator port (default: 8681) and ready port (default: 8682) can be changed via setting
+the environment variables `EMULATOR_PORT` and `EMULATOR_READY_PORT` respectively when starting the container.
+
+### Create topic and subscription
+This image also provides the ability to create topics and subscriptions in projects on startup
+by specifying the `PUBSUB_PROJECT` environment variable with a sequential number appended to it,
+starting with _1_. The format of the environment variable is relatively simple:
+
+```txt
+PUBSUB_PROJECT1=PROJECT_1,TOPIC_1,TOPIC_2:SUBSCRIPTION_1:SUBSCRIPTION_2,TOPIC_3:SUBSCRIPTION_3
+PUBSUB_PROJECT2=PROJECT_2,TOPIC_4
 ```
 
-A comma-separated list where the first item is the _project ID_ and the rest are topics. The topics themselves are colon-separated where the first item is the _topic ID_ and the rest are _subscription IDs_. A topic doesn't necessarily need to specify subscriptions.
+A comma-separated list where the first item is the _project ID_ and the rest are topics.
+The topics themselves are colon-separated where the first item is the _topic ID_ and the rest are _subscription IDs_.
 
-For example, if you have _project ID_ `company-dev`, with topic `invoices` that has a subscription `invoice-calculator`, another topic `chats` with subscriptions `slack-out` and `irc-out` and a third topic `notifications` without any subscriptions, you'd define it this way:
+A topic doesn't necessarily need to specify subscriptions. Created subscriptions are _pull_ subscriptions.
 
-```
+**Note**: At least the first `PUBSUB_PROJECT1` with a project ID and one topic needs to be given.
+
+For example, if you have _project ID_ `company-dev`, with topic `invoices` that has a subscription `invoice-calculator`,
+another topic `chats` with subscriptions `slack-out` and `irc-out` and a third topic `notifications` without any subscriptions,
+you'd define it this way:
+
+```txt
 PUBSUB_PROJECT1=company-dev,invoices:invoice-calculator,chats:slack-out:irc-out,notifications
 ```
 
 So the full command would look like:
 
-```
-docker run --rm -ti -p 8681:8681 -e PUBSUB_PROJECT1=company-dev,invoices:invoice-calculator,chats:slack-out:irc-out,notifications messagebird/gcloud-pubsub-emulator:latest
+```shell
+docker run -d \
+  -p 8681:8681 \
+  -e PUBSUB_PROJECT1=company-dev,invoices:invoice-calculator,chats:slack-out:irc-out,notifications \
+  tungbeier/gcloud-pubsub-emulator:latest
 ```
 
 If you want to define more projects, you'd simply add a `PUBSUB_PROJECT2`, `PUBSUB_PROJECT3`, etc.
 
-### wait-for, wait-for-it
-If you're using this Docker image in a docker-compose setup or something similar, you might have leveraged scripts like [wait-for](https://github.com/eficode/wait-for) or [wait-for-it](https://github.com/vishnubob/wait-for-it) to detect when the PubSub service comes up before starting a container that depends on it being up. If you're _not_ using the above-mentioned _PUBSUB_PROJECT_ environment variable, you can simply check if port `8681` is available. If you _do_ depend on one or more _PUBSUB_PROJECT_ environment variables, you should check for the availability of port `8682` as that one will become available once all the topics and subscriptions have been created.
+### Check for readiness
+
+When this image starts up, the emulator port 8681 (default) will be made available.
+After it creates all the specified projects with their topics and subscriptions, the port 8682 will also be opened.
+
+So if you're using this Docker image in a docker-compose setup or something similar,
+you might have leveraged scripts like [wait-for](https://github.com/eficode/wait-for) or [wait-for-it](https://github.com/vishnubob/wait-for-it)
+to detect when the PubSub service with all required projects, topics and subscriptions are available, before starting a container that depends on them.
+
