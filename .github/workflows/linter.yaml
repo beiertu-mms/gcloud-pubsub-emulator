@@ -1,6 +1,6 @@
 ---
 name: Lint Code Base
-on:
+"on":
   pull_request:
     types:
       - "opened"
@@ -26,10 +26,11 @@ jobs:
 
       - name: Lint
         uses: oxsecurity/megalinter/flavors/ci_light@v6 # see https://megalinter.io/flavors/
+        # See https://megalinter.io/configuration/ for all available configurations
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true  # Lint only changed files
-          APPLY_FIXES: none # all, none, or list of linter keys
+          APPLY_FIXES: none
           LOG_LEVEL: INFO
           PRINT_ALPACA: false
           ENABLE: REPOSITORY
@@ -43,34 +44,3 @@ jobs:
           path: |
             megalinter-reports
             mega-linter.log
-
-# Configuration file for MegaLinter
-# See https://megalinter.io/configuration/ for all available configurations
-# APPLY_FIXES: all # all, none, or list of linter keys
-# LOG_LEVEL: INFO
-# PRINT_ALPACA: false
-# LINTER_RULES_PATH: .github/linters
-# SHOW_ELAPSED_TIME: false
-# FILEIO_REPORTER: false
-# IGNORE_GENERATED_FILES: true
-# IGNORE_GITIGNORED_FILES: true
-# FORMATTERS_DISABLE_ERRORS: true # Set to false if formatter issues should be reported as errors
-# DISABLE:
-#   - SPELL
-# ENABLE_LINTERS:
-#   # see https://megalinter.io/latest/flavors/java/ for all available linters used with java flavor
-#   - BASH_SHELLCHECK
-#   - KOTLIN_KTLINT
-#   - JSON_JSONLINT
-#   - MARKDOWN_MARKDOWNLINT
-#   - YAML_YAMLLINT
-#   - XML_XMLLINT
-#   - REPOSITORY_GITLEAKS
-#   - ACTION_ACTIONLINT
-#   - DOCKERFILE_HADOLINT
-#   - EDITORCONFIG_EDITORCONFIG_CHECKER
-#   - COPYPASTE_JSCPD
-#   - REPOSITORY_GITLEAKS
-# FILTER_REGEX_EXCLUDE: '(mvnw|.mvn/.*)'
-# YAML_YAMLLINT_FILTER_REGEX_EXCLUDE: '(libs/model/src/main/resources/specs/*)'
-# DISABLE_ERRORS: true # For the moment, the linting errors will be considered as suggestions, instead of hard requirement.

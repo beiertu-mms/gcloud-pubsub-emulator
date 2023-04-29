@@ -15,4 +15,3 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "chore(actions): "
-
