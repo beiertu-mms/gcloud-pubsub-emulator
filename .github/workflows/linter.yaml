@@ -1,0 +1,76 @@
+---
+name: Lint Code Base
+on:
+  pull_request:
+    types:
+      - "opened"
+      - "reopened"
+      - "synchronize"
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.draft == false }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # fetch-depth: 0 # can be removed if VALIDATE_ALL_CODEBASE = true
+
+      - name: Lint
+        uses: oxsecurity/megalinter/flavors/ci_light@v6 # see https://megalinter.io/flavors/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: true  # Lint only changed files
+          APPLY_FIXES: none # all, none, or list of linter keys
+          LOG_LEVEL: INFO
+          PRINT_ALPACA: false
+          ENABLE: REPOSITORY
+          ENABLE_LINTERS: BASH_SHELLCHECK,YAML_YAMLLINT,DOCKERFILE_HADOLINT
+
+      - name: Upload reports
+        if: ${{ success() }} || ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: MegaLinter reports
+          path: |
+            megalinter-reports
+            mega-linter.log
+
+# Configuration file for MegaLinter
+# See https://megalinter.io/configuration/ for all available configurations
+# APPLY_FIXES: all # all, none, or list of linter keys
+# LOG_LEVEL: INFO
+# PRINT_ALPACA: false
+# LINTER_RULES_PATH: .github/linters
+# SHOW_ELAPSED_TIME: false
+# FILEIO_REPORTER: false
+# IGNORE_GENERATED_FILES: true
+# IGNORE_GITIGNORED_FILES: true
+# FORMATTERS_DISABLE_ERRORS: true # Set to false if formatter issues should be reported as errors
+# DISABLE:
+#   - SPELL
+# ENABLE_LINTERS:
+#   # see https://megalinter.io/latest/flavors/java/ for all available linters used with java flavor
+#   - BASH_SHELLCHECK
+#   - KOTLIN_KTLINT
+#   - JSON_JSONLINT
+#   - MARKDOWN_MARKDOWNLINT
+#   - YAML_YAMLLINT
+#   - XML_XMLLINT
+#   - REPOSITORY_GITLEAKS
+#   - ACTION_ACTIONLINT
+#   - DOCKERFILE_HADOLINT
+#   - EDITORCONFIG_EDITORCONFIG_CHECKER
+#   - COPYPASTE_JSCPD
+#   - REPOSITORY_GITLEAKS
+# FILTER_REGEX_EXCLUDE: '(mvnw|.mvn/.*)'
+# YAML_YAMLLINT_FILTER_REGEX_EXCLUDE: '(libs/model/src/main/resources/specs/*)'
+# DISABLE_ERRORS: true # For the moment, the linting errors will be considered as suggestions, instead of hard requirement.
