@@ -24,5 +24,5 @@ ENV LD_PRELOAD=/lib/libgcompat.so.0
 
 EXPOSE 8681
 
-CMD /run.sh
+CMD ["/run.sh"]
 
