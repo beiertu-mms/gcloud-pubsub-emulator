@@ -5,8 +5,8 @@ on:
   release:
     types: [published]
   push:
-    # branches:
-      # - "master"
+    branches:
+      - "master"
   
 jobs:
   publish:
@@ -27,7 +27,7 @@ jobs:
             latest=auto
           tags: |
             type=semver,pattern={{version}}
-            type=raw,value=latest
+            type=raw,value=latest,enable={{is_default_branch}}
           labels: |
             org.opencontainers.image.vendor=tungbeier
             org.opencontainers.image.maintainer=tung.beier@gmx.de
@@ -38,16 +38,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - run: |
-          echo "Tags"
-          echo ${{ steps.meta.outputs.tags }}
-          echo "Labels"
-          echo ${{ steps.meta.outputs.labels }}
-
-      # - name: Build and push Docker images
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

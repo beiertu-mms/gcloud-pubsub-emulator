@@ -10,9 +10,10 @@ The source code can be found in [this Github repository](https://github.com/beie
 
 ## Supported tags
 
-- `latest`: latest version of the image with the [last published gcloud version][google-release-note]
+- `latest`: latest build of the image with the [last commit on master branch][master-branch]
 - `\d+.\d+.\d+`: the build for a [given gcloud version][google-release-note]
 
+[master-branch]: https://github.com/beiertu-mms/gcloud-pubsub-emulator/tree/master
 [google-release-note]: https://cloud.google.com/release-notes
 
 ## Usage
