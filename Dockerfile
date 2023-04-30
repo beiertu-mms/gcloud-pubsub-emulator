@@ -1,13 +1,13 @@
 FROM golang:alpine as builder
 
-RUN apk update && apk upgrade && apk add --no-cache curl git
-
 ARG WAITFOR_VERSION=2.2.4
-RUN curl -vsSLo /usr/bin/wait-for \
-    "https://github.com/eficode/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for"
-RUN chmod +x /usr/bin/wait-for
-
-RUN go install github.com/prep/pubsubc@latest
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache curl git \
+    && curl -vsSLo /usr/bin/wait-for \
+    "https://github.com/eficode/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for" \
+    && chmod +x /usr/bin/wait-for \
+    && go install github.com/prep/pubsubc@latest
 
 ################################################################################
 
