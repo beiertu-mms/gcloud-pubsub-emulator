@@ -1,13 +1,13 @@
 ---
 name: Publish
 
-on:
+"on":
   release:
     types: [published]
   push:
     branches:
       - "master"
-  
+
 jobs:
   publish:
     runs-on: ubuntu-latest
