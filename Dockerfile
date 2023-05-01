@@ -17,12 +17,17 @@ COPY --from=builder /usr/bin/wait-for /usr/bin
 COPY --from=builder /go/bin/pubsubc   /usr/bin
 COPY                run.sh            /run.sh
 
+ARG PUBSUB_USER=pubsub
+
 RUN apk --update add --no-cache openjdk17-jre='17.0.7_p7-r0' netcat-openbsd='1.130-r4' gcompat='1.1.0-r0' \
-    && gcloud components install beta pubsub-emulator
+    && gcloud components install beta pubsub-emulator \
+    && adduser -D ${PUBSUB_USER} \
+    && chown -v ${PUBSUB_USER} /run.sh
 
 ENV LD_PRELOAD=/lib/libgcompat.so.0
 
 EXPOSE 8681
+USER ${PUBSUB_USER}
 
 CMD ["/run.sh"]
 
