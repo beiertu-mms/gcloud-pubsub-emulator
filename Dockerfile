@@ -25,8 +25,13 @@ RUN apk --update add --no-cache openjdk17-jre='17.0.7_p7-r0' netcat-openbsd='1.1
     && chown -v ${PUBSUB_USER} /run.sh
 
 ENV LD_PRELOAD=/lib/libgcompat.so.0
+ENV EMULATOR_PORT=8681
+ENV EMULATOR_READY_PORT=8682
 
-EXPOSE 8681
+EXPOSE ${EMULATOR_PORT}
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
+  CMD wget "http://localhost:${EMULATOR_READY_PORT}" || exit 1
+
 USER ${PUBSUB_USER}
 
 CMD ["/run.sh"]
