@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    if: github.actor != 'dependabot[bot]'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
