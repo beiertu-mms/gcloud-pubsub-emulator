@@ -3,7 +3,7 @@ FROM golang:alpine as builder
 ARG WAITFOR_VERSION=2.2.4
 RUN apk update \
     && apk upgrade \
-    && apk add --no-cache curl='8.0.1-r0' git='2.38.5-r0' \
+    && apk add --no-cache curl='8.0.1-r2' git='2.38.5-r0' \
     && curl -vsSLo /usr/bin/wait-for \
     "https://github.com/eficode/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for" \
     && chmod +x /usr/bin/wait-for \
