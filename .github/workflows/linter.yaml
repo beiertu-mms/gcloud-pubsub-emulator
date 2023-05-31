@@ -25,7 +25,7 @@ jobs:
           # fetch-depth: 0 # can be removed if VALIDATE_ALL_CODEBASE = true
 
       - name: Lint
-        uses: oxsecurity/megalinter/flavors/ci_light@v6 # see https://megalinter.io/flavors/
+        uses: oxsecurity/megalinter/flavors/ci_light@v7 # see https://megalinter.io/flavors/
         # See https://megalinter.io/configuration/ for all available configurations
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
