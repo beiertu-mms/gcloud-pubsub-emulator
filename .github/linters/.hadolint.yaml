@@ -1,0 +1,6 @@
+---
+# See https://github.com/hadolint/hadolint#configure
+
+failure-threshold: warning
+ignored:
+  - "DL3018" # [warning] Pin versions in apk add
