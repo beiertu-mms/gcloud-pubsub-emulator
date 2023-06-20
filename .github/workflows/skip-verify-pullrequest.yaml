@@ -1,0 +1,25 @@
+---
+name: Verify pull request
+"on":
+  pull_request:
+    branches:
+      - "master"
+    types:
+      - "opened"
+      - "reopened"
+      - "synchronize"
+    paths-ignore:
+      - "Dockerfile"
+      - "run.sh"
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  verify_pull_request:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.draft == false }}
+    steps:
+      - run: echo 'Skip verify pull request check.'
+
