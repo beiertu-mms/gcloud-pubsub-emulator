@@ -2,10 +2,15 @@
 name: Verify pull request
 "on":
   pull_request:
+    branches:
+      - "master"
     types:
       - "opened"
       - "reopened"
       - "synchronize"
+    paths:
+      - "Dockerfile"
+      - "run.sh"
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -21,28 +26,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      # - name: Get changed files
-      #   id: changed-files
-      #   uses: tj-actions/changed-files@v36
-      #   with:
-      #     files: |
-      #       Dockerfile
-      #       run.sh
 
       - name: Build image
         uses: docker/build-push-action@v4
-        # if: steps.changed-files.outputs.any_changed == 'true'
         with:
           context: .
           push: false
           tags: ${{ env.image_tag }}
-
-      - name: Set up Cloud SDK
-        # if: steps.changed-files.outputs.any_changed == 'true'
-        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Set up python
         uses: actions/setup-python@v4
@@ -50,7 +40,6 @@ jobs:
           python-version: '3.11'
 
       - name: Verify image
-        # if: steps.changed-files.outputs.any_changed == 'true'
         env:
           project: 'test-project'
           topic: 'test-topic'
@@ -66,14 +55,14 @@ jobs:
 
           cd .github/workflows/python-pubsub
 
-          echo "Install python requirements"
+          echo "[INFO] Install python requirements"
           pip install -q -r requirements.txt
 
-          echo "Create pull subscription"
+          echo "[INFO] Create pull subscription"
           python subscriber.py ${{ env.project }} create ${{ env.topic }} ${{ env.subscription }}
 
-          echo "Publish message"
+          echo "[INFO] Publish message"
           python publisher.py ${{ env.project }} publish ${{ env.topic }}
 
-          echo "Receive message"
+          echo "[INFO] Receive message"
           python subscriber.py ${{ env.project }} receive ${{ env.subscription }} 10
