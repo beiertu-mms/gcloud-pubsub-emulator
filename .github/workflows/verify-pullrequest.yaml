@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false }}
+    env:
+      image_tag: "tungbeier/gcloud-pubsub-emulator:test"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -36,4 +38,19 @@ jobs:
         with:
           context: .
           push: false
-          tags: tungbeier/gcloud-pubsub-emulator:test
+          tags: ${{ env.image_tag }}
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Verify image
+        run: |
+          docker run --detach --rm \
+            --name emulator \
+            --publish 8681:8681 \
+            --env PUBSUB_PROJECT1=test-project,test-topic \
+            ${{ env.image_tag }}
+
+          export PUBSUB_EMULATOR_HOST=localhost:8681
+
+          gcloud pubsub topics publish test-topic --message="test"
