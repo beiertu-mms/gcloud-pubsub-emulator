@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 if [[ -z "${EMULATOR_PORT}" ]]; then
-  echo "[run.sh] EMULATOR_PORT environment variable is not set. Default to 8681."
+  echo "[pubsub-emulator] EMULATOR_PORT environment variable is not set. Default to 8681."
   EMULATOR_PORT=8681
 fi
 
 if [[ -z "${EMULATOR_READY_PORT}" ]]; then
-  echo "[run.sh] EMULATOR_READY_PORT environment variable is not set. Default to 8682."
+  echo "[pubsub-emulator] EMULATOR_READY_PORT environment variable is not set. Default to 8682."
   EMULATOR_READY_PORT=8682
 fi
 
@@ -16,12 +16,12 @@ fi
 # After it's done, port 8682 will be open to facilitate the wait-for and
 # wait-for-it scripts.
 (
-  echo "[run.sh] Wait for emulator to start on port $EMULATOR_PORT"
+  echo "[pubsub-emulator] Wait for emulator to start on port $EMULATOR_PORT"
   /usr/bin/wait-for localhost:"$EMULATOR_PORT" \
     -- env PUBSUB_EMULATOR_HOST=localhost:"$EMULATOR_PORT" \
     /usr/bin/pubsubc -debug
 
-  echo "[run.sh] Open readiness port $EMULATOR_READY_PORT"
+  echo "[pubsub-emulator] Open readiness port $EMULATOR_READY_PORT"
   nc -lkp "$EMULATOR_READY_PORT" >/dev/null
 ) &
 

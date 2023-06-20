@@ -22,4 +22,3 @@ jobs:
     if: ${{ github.event.pull_request.draft == false }}
     steps:
       - run: echo 'Skip verify pull request check.'
-
