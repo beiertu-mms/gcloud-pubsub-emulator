@@ -2,10 +2,15 @@
 name: Verify pull request
 "on":
   pull_request:
+    branches:
+      - "master"
     types:
       - "opened"
       - "reopened"
       - "synchronize"
+    paths:
+      - "Dockerfile"
+      - "run.sh"
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -16,24 +21,48 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false }}
+    env:
+      image_tag: "tungbeier/gcloud-pubsub-emulator:test"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v36
-        with:
-          files: |
-            Dockerfile
-            run.sh
 
       - name: Build image
         uses: docker/build-push-action@v4
-        if: steps.changed-files.outputs.any_changed == 'true'
         with:
           context: .
           push: false
-          tags: tungbeier/gcloud-pubsub-emulator:test
+          tags: ${{ env.image_tag }}
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Verify image
+        env:
+          project: 'test-project'
+          topic: 'test-topic'
+          subscription: 'test-subscription'
+        run: |
+          docker run --detach --rm \
+            --name emulator \
+            --publish 8681:8681 \
+            --env PUBSUB_PROJECT1=${{ env.project }},${{ env.topic }} \
+            ${{ env.image_tag }}
+
+          export PUBSUB_EMULATOR_HOST=localhost:8681
+
+          cd .github/workflows/python-pubsub
+
+          echo "[INFO] Install python requirements"
+          pip install -q -r requirements.txt
+
+          echo "[INFO] Create pull subscription"
+          python subscriber.py ${{ env.project }} create ${{ env.topic }} ${{ env.subscription }}
+
+          echo "[INFO] Publish message"
+          python publisher.py ${{ env.project }} publish ${{ env.topic }}
+
+          echo "[INFO] Receive message"
+          python subscriber.py ${{ env.project }} receive ${{ env.subscription }} 10
