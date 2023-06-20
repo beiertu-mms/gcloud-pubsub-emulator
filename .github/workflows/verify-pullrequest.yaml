@@ -41,16 +41,39 @@ jobs:
           tags: ${{ env.image_tag }}
 
       - name: Set up Cloud SDK
+        # if: steps.changed-files.outputs.any_changed == 'true'
         uses: 'google-github-actions/setup-gcloud@v1'
 
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
       - name: Verify image
+        # if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          project: 'test-project'
+          topic: 'test-topic'
+          subscription: 'test-subscription'
         run: |
           docker run --detach --rm \
             --name emulator \
             --publish 8681:8681 \
-            --env PUBSUB_PROJECT1=test-project,test-topic \
+            --env PUBSUB_PROJECT1=${{ env.project }},${{ env.topic }} \
             ${{ env.image_tag }}
 
           export PUBSUB_EMULATOR_HOST=localhost:8681
 
-          gcloud pubsub topics publish test-topic --message="test"
+          cd .github/workflows/python-pubsub
+
+          echo "Install python requirements"
+          pip install -q -r requirements.txt
+
+          echo "Create pull subscription"
+          python subscriber.py ${{ env.project }} create ${{ env.topic }} ${{ env.subscription }}
+
+          echo "Publish message"
+          python publisher.py ${{ env.project }} publish ${{ env.topic }}
+
+          echo "Receive message"
+          python subscriber.py ${{ env.project }} receive ${{ env.subscription }} 10
