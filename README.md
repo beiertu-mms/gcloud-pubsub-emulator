@@ -27,19 +27,26 @@ docker run -d -p 8681:8681 -e PUBSUB_PROJECT1=test-project,test-topic tungbeier/
 Or, with [docker-compose](https://docs.docker.com/compose/), first create a `docker-compose.yaml`
 
 ```yaml
+
 ---
 services:
   pubsub-emulator:
     image: tungbeier/gcloud-pubsub-emulator:latest
     container_name: pubsub-emulator
     expose:
-      - "8681"
       - "8682"
     ports:
       - "8681:8681"
-      - "8682:8682"
     environment:
-      - PUBSUB_PROJECT1=test-project,test-topic
+      - PUBSUB_PROJECT1=test-project,test-topic:test-subscription
+
+  # verify, that the emulator is running
+  wait-for:
+    image: eficode/wait-for:latest
+    container_name: wait-for
+    command: ["pubsub-emulator:8682", "--", "echo", "pubsub emulator is running"]
+    depends_on:
+      - pubsub-emulator
 ```
 
 then run
