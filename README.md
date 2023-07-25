@@ -16,6 +16,8 @@ The source code can be found in [this Github repository](https://github.com/beie
 [master-branch]: https://github.com/beiertu-mms/gcloud-pubsub-emulator/tree/master
 [google-release-note]: https://cloud.google.com/release-notes
 
+This image is available with gcloud version >= `428.0.0`.
+
 ## Usage
 
 To run this image:
