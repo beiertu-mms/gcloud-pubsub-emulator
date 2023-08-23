@@ -19,12 +19,11 @@ COPY                run.sh            /run.sh
 
 ARG PUBSUB_USER=pubsub
 
-RUN apk --update add --no-cache openjdk17-jre netcat-openbsd gcompat \
+RUN apk --update add --no-cache openjdk17-jre netcat-openbsd \
     && gcloud components install beta pubsub-emulator \
     && adduser -D ${PUBSUB_USER} \
     && chown -v ${PUBSUB_USER} /run.sh
 
-ENV LD_PRELOAD=/lib/libgcompat.so.0
 ENV EMULATOR_PORT=8681
 ENV EMULATOR_READY_PORT=8682
 
