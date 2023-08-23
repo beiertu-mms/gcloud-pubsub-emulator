@@ -1,0 +1,19 @@
+---
+changelog:
+  categories:
+    - title: "✨ Features"
+      labels:
+        - enhancement
+    - title: "🐛 Bugfixes"
+      labels:
+        - bug
+    - title: "⬆️ Updates"
+      labels:
+        - dependencies
+        - github_actions
+    - title: "📝️ Documentation"
+      labels:
+        - documentation
+    - title: "🌐 Other changes"
+      labels:
+        - "*"

@@ -2,12 +2,11 @@
 name: Publish
 
 "on":
-  release:
-    types: [published]
   push:
     branches:
       - "master"
-  workflow_dispatch:
+    tags:
+      - "v*"
 
 jobs:
   publish:
