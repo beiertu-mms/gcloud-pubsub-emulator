@@ -1,12 +1,13 @@
-# gcloud-pubsub-emulator
+# Gcloud PubSub Emulator
 
-This repository contains the Docker configuration for Google's PubSub emulator.
+[![GitHub](https://img.shields.io/github/license/beiertu-mms/gcloud-pubsub-emulator)](./LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/beiertu-mms/gcloud-pubsub-emulator)](https://github.com/beiertu-mms/gcloud-pubsub-emulator/releases)
+
+This repository contains the Docker configuration for [Google's PubSub emulator](https://cloud.google.com/pubsub/docs/emulator).
 It's mainly the dockerization and documentation of [prep/pubsubc](https://github.com/prep/pubsubc).
 
 This is a fork of [marcelcorso/gcloud-pubsub-emulator](https://github.com/marcelcorso/gcloud-pubsub-emulator),
 with updated versions of [gcloud](https://cloud.google.com/sdk/gcloud), [OpenJDK](https://openjdk.org) and [eficode/wait-for](https://github.com/eficode/wait-for).
-
-The source code can be found in [this Github repository](https://github.com/beiertu-mms/gcloud-pubsub-emulator).
 
 ## Supported tags
 
@@ -23,7 +24,10 @@ This image is available with gcloud version >= `428.0.0`.
 To run this image:
 
 ```shell
-docker run -d -p 8681:8681 -e PUBSUB_PROJECT1=test-project,test-topic tungbeier/gcloud-pubsub-emulator:latest
+docker run -d \
+  -p 8681:8681 \
+  -e PUBSUB_PROJECT1=test-project,test-topic:test-subscription \
+  tungbeier/gcloud-pubsub-emulator:latest
 ```
 
 Or, with [docker-compose](https://docs.docker.com/compose/), first create a `docker-compose.yaml`
@@ -57,7 +61,7 @@ then run
 docker-compose up -d
 ```
 
-After the container has started, the `PUBSUB_EMULATOR_HOST` environment variable needs to be set before running any application, either with
+After the container has started, the `PUBSUB_EMULATOR_HOST` environment variable needs to be set before running any application against the emulator, either with
 
 ```shell
 export PUBSUB_EMULATOR_HOST=localhost:8681
@@ -90,7 +94,7 @@ The topics themselves are colon-separated where the first item is the _topic ID_
 
 A topic doesn't necessarily need to specify subscriptions. Created subscriptions are _pull_ subscriptions.
 
-**Note**: At least the first `PUBSUB_PROJECT1` with a project ID and one topic needs to be given.
+:warning: At least the first `PUBSUB_PROJECT1` with a project ID and one topic needs to be given.
 
 For example, if you have _project ID_ `company-dev`, with topic `invoices` that has a subscription `invoice-calculator`,
 another topic `chats` with subscriptions `slack-out` and `irc-out` and a third topic `notifications` without any subscriptions,
