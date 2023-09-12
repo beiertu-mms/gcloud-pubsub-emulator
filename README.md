@@ -1,7 +1,13 @@
-# Gcloud PubSub Emulator
+<h1 align="center">Gcloud PubSub Emulator</h1>
 
-[![GitHub](https://img.shields.io/github/license/beiertu-mms/gcloud-pubsub-emulator)](./LICENSE)
-[![GitHub release](https://img.shields.io/github/v/release/beiertu-mms/gcloud-pubsub-emulator)](https://github.com/beiertu-mms/gcloud-pubsub-emulator/releases)
+<p align="center">
+  <a href="https://github.com/beiertu-mms/gcloud-pubsub-emulator/blob/master/LICENSE">
+    <img alt="license" src="https://img.shields.io/github/license/beiertu-mms/gcloud-pubsub-emulator" />
+  </a>
+  <a href="https://github.com/beiertu-mms/gcloud-pubsub-emulator/releases">
+    <img alt="version" src="https://img.shields.io/github/v/release/beiertu-mms/gcloud-pubsub-emulator" />
+  </a>
+</p>
 
 This repository contains the Docker configuration for [Google's PubSub emulator](https://cloud.google.com/pubsub/docs/emulator).
 It's mainly the dockerization and documentation of [prep/pubsubc](https://github.com/prep/pubsubc).
