@@ -7,13 +7,14 @@ name: Publish
       - "master"
     tags:
       - "v*"
+  workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    if: github.actor != 'dependabot[bot]'
+    if: ${{ github.actor != 'dependabot[bot]' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
