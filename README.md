@@ -1,4 +1,6 @@
-<h1 align="center">Gcloud PubSub Emulator</h1>
+<h1 align="center">
+  <img alt="cch" src=".github/banner.png">
+</h1>
 
 <p align="center">
   <a href="https://github.com/beiertu-mms/gcloud-pubsub-emulator/blob/master/LICENSE">
@@ -100,7 +102,8 @@ The topics themselves are colon-separated where the first item is the _topic ID_
 
 A topic doesn't necessarily need to specify subscriptions. Created subscriptions are _pull_ subscriptions.
 
-:warning: At least the first `PUBSUB_PROJECT1` with a project ID and one topic needs to be given.
+> [!IMPORTANT]
+> At least the first `PUBSUB_PROJECT1` with a project ID and one topic needs to be given.
 
 For example, if you have _project ID_ `company-dev`, with topic `invoices` that has a subscription `invoice-calculator`,
 another topic `chats` with subscriptions `slack-out` and `irc-out` and a third topic `notifications` without any subscriptions,
