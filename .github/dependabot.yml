@@ -17,7 +17,7 @@ updates:
       prefix: "chore(actions): "
 
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/.github/workflows/python-pubsub"
     schedule:
       interval: "daily"
     commit-message:
