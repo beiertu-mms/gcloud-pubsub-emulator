@@ -9,6 +9,7 @@ name: Verify pull request
       - "reopened"
       - "synchronize"
     paths:
+      - ".github/workflows/python-pubsub/*"
       - "Dockerfile"
       - "run.sh"
 
