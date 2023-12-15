@@ -15,6 +15,8 @@ jobs:
     permissions:
       contents: read
     if: ${{ github.actor != 'dependabot[bot]' || github.event_name == 'workflow_dispatch' }}
+    env:
+      IMAGE_NAME: docker.io/tungbeier/gcloud-pubsub-emulator
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -24,7 +26,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            docker.io/tungbeier/gcloud-pubsub-emulator
+            ${{ env.IMAGE_NAME }}
           flavor: |
             latest=auto
           tags: |
@@ -50,3 +52,15 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Scan image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.IMAGE_NAME }}:latest'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
