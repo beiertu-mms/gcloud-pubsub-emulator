@@ -8,20 +8,43 @@ name: Verify pull request
       - "opened"
       - "reopened"
       - "synchronize"
-    paths:
-      - ".github/workflows/python-pubsub/*"
-      - "Dockerfile"
-      - "run.sh"
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
-  verify_pull_request:
+  preparation:
+    name: Prepare for build
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     if: ${{ github.event.pull_request.draft == false }}
+    outputs:
+      has_changed: ${{ steps.changed-files.outputs.any_changed }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed modules
+        id: changed-files
+        uses: tj-actions/changed-files@v40
+        if: github.event_name == 'pull_request'
+        with:
+          files: |
+            Dockerfile
+            run.sh
+            .github/workflows/python-pubsub/**
+            .github/workflows/publish.yaml
+            .github/workflows/verify-pullrequest.yaml
+
+  verify_pull_request:
+    name: Verify changes
+    runs-on: ubuntu-latest
+    needs: preparation
+    timeout-minutes: 30
+    if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     env:
       image_tag: "tungbeier/gcloud-pubsub-emulator:test"
     steps:
@@ -37,6 +60,16 @@ jobs:
           context: .
           load: true
           tags: ${{ env.image_tag }}
+
+      - name: Scan image
+        uses: aquasecurity/trivy-action@0.16.0
+        with:
+          image-ref: ${{ env.image_tag }}
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL'
 
       - name: Set up python
         uses: actions/setup-python@v5
