@@ -38,6 +38,16 @@ jobs:
           load: true
           tags: ${{ env.image_tag }}
 
+      - name: Scan image
+        uses: aquasecurity/trivy-action@0.16.0
+        with:
+          image-ref: ${{ env.image_tag }}
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
       - name: Set up python
         uses: actions/setup-python@v5
         with:
