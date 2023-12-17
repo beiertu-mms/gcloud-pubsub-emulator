@@ -12,7 +12,8 @@
 </p>
 
 This repository contains the Docker configuration for [Google's PubSub emulator](https://cloud.google.com/pubsub/docs/emulator).
-It's mainly the dockerization and documentation of [prep/pubsubc](https://github.com/prep/pubsubc).
+
+It's also used [beiertu-mms/pubsubc](https://github.com/beiertu-mms/pubsubc) (a fork of [prep/pubsubc](https://github.com/prep/pubsubc)) to create topics and their subscriptions.
 
 This is a fork of [marcelcorso/gcloud-pubsub-emulator](https://github.com/marcelcorso/gcloud-pubsub-emulator),
 with updated versions of [gcloud](https://cloud.google.com/sdk/gcloud), [OpenJDK](https://openjdk.org) and [eficode/wait-for](https://github.com/eficode/wait-for).
