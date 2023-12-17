@@ -7,7 +7,7 @@ RUN apk update \
     && curl -vsSLo /usr/bin/wait-for \
     "https://github.com/eficode/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for" \
     && chmod +x /usr/bin/wait-for \
-    && go install github.com/prep/pubsubc@latest
+    && go install github.com/beiertu-mms/pubsubc@latest
 
 ################################################################################
 
