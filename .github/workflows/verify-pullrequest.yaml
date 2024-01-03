@@ -62,7 +62,7 @@ jobs:
           tags: ${{ env.image_tag }}
 
       - name: Scan image
-        uses: aquasecurity/trivy-action@0.16.0
+        uses: aquasecurity/trivy-action@0.16.1
         with:
           image-ref: ${{ env.image_tag }}
           format: 'table'
