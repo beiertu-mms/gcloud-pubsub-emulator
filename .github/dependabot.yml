@@ -16,6 +16,13 @@ updates:
     commit-message:
       prefix: "chore(actions): "
 
+  - package-ecosystem: "github-actions"
+    directory: "/.github/actions/build-image"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "chore(actions): "
+
   - package-ecosystem: "pip"
     directory: "/.github/workflows/python-pubsub"
     schedule:
