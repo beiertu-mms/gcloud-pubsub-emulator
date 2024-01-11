@@ -1,0 +1,47 @@
+---
+schemaVersion: 2.0.0
+
+commandTests:
+  - name: 'pubsubc'
+    command: 'pubsubc'
+    args: ['-help']
+    expectedOutput:
+      - '.*Usage: env PUBSUB_PROJECT1="project1,topic1,topic2:subscription1" pubsubc.*'
+
+  - name: 'wait-for'
+    command: 'wait-for'
+    args: ['--version']
+    expectedOutput:
+      - '2\.2\.4'
+
+  - name: 'jre'
+    command: 'java'
+    args: ['--version']
+    expectedOutput:
+      - '.*openjdk 17\.0\.9.+'
+      - '.*OpenJDK Runtime Environment.+'
+      - '.*OpenJDK 64-Bit Server VM.+'
+
+  - name: 'pubsub-emulator'
+    command: 'gcloud'
+    args: ['components', 'list', '--only-local-state']
+    expectedOutput:
+      - '.*gcloud Beta Commands .+ beta .+'
+      - '.*Cloud Pub\/Sub Emulator .+ pubsub-emulator .+'
+
+fileExistenceTests:
+  - name: 'run.sh'
+    path: '/run.sh'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+    uid: 1001
+    gid: 0
+    isExecutableBy: 'owner'
+
+  - name: 'netcat-openbsd'
+    path: '/usr/bin/nc'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+    uid: 0
+    gid: 0
+    isExecutableBy: 'owner'
