@@ -38,6 +38,7 @@ jobs:
           files: |
             Dockerfile
             run.sh
+            container-structure-test.yaml
             .github/workflows/python-pubsub/**
             .github/workflows/publish.yaml
             .github/workflows/verify-pullrequest.yaml
