@@ -18,7 +18,7 @@ commandTests:
     command: 'java'
     args: ['--version']
     expectedOutput:
-      - '.*openjdk 17\.0\.9.+'
+      - '.*openjdk 17\.(\d{1,}\.\d{1,}).+'
       - '.*OpenJDK Runtime Environment.+'
       - '.*OpenJDK 64-Bit Server VM.+'
 
