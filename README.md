@@ -9,6 +9,12 @@
   <a href="https://github.com/beiertu-mms/gcloud-pubsub-emulator/releases">
     <img alt="version" src="https://img.shields.io/github/v/release/beiertu-mms/gcloud-pubsub-emulator" />
   </a>
+  <a href="https://hub.docker.com/r/tungbeier/gcloud-pubsub-emulator">
+    <img alt="Docker Image Size (latest)" src="https://img.shields.io/docker/image-size/tungbeier/gcloud-pubsub-emulator/latest">
+  </a>
+  <a href="https://hub.docker.com/r/tungbeier/gcloud-pubsub-emulator">
+    <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/tungbeier/gcloud-pubsub-emulator">
+  </a>
 </p>
 
 This repository contains the Docker configuration for [Google's PubSub emulator](https://cloud.google.com/pubsub/docs/emulator).
