@@ -1,2 +1,2 @@
-google-cloud-pubsub==2.22.0
+google-cloud-pubsub==2.23.0
 avro==1.11.3
