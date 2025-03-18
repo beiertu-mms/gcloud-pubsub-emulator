@@ -1,20 +1,23 @@
-FROM golang:alpine as builder
+FROM golang:alpine AS builder
 
 ARG WAITFOR_VERSION=2.2.4
+
+ADD ./pubsubc /pubsubc
+
 RUN apk update \
     && apk upgrade \
     && apk add --no-cache curl git \
     && curl -vsSLo /usr/bin/wait-for \
     "https://github.com/eficode/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for" \
     && chmod +x /usr/bin/wait-for \
-    && go install github.com/beiertu-mms/pubsubc@latest
+    && go build -C /pubsubc -v
 
 ################################################################################
 
 FROM google/cloud-sdk:514.0.0-alpine
 
 COPY --from=builder /usr/bin/wait-for /usr/bin
-COPY --from=builder /go/bin/pubsubc   /usr/bin
+COPY --from=builder /pubsubc/pubsubc   /usr/bin
 COPY                run.sh            /run.sh
 
 ARG PUBSUB_USER=pubsub
