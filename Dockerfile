@@ -2,7 +2,7 @@ FROM golang:alpine AS builder
 
 ARG WAITFOR_VERSION=2.2.4
 
-ADD ./pubsubc /pubsubc
+COPY ./pubsubc /pubsubc
 
 RUN apk update \
     && apk upgrade \
