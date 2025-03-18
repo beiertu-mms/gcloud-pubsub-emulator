@@ -3,3 +3,7 @@
 
 # Except...
 !run.sh
+!pubsubc/go.mod
+!pubsubc/go.sum
+!pubsubc/main.go
+
