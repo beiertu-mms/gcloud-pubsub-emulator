@@ -1,4 +1,3 @@
----
 name: Verify pull request
 "on":
   pull_request:
@@ -26,13 +25,13 @@ jobs:
       has_changed: ${{ steps.changed-files.outputs.any_changed }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
       - name: Get changed modules
         id: changed-files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         if: github.event_name == 'pull_request'
         with:
           files: |
@@ -51,13 +50,13 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: ./.github/actions/build-image
         with:
           image: ${{ env.image_tag }}
 
       - name: Scan image
-        uses: aquasecurity/trivy-action@0.30.0
+        uses: aquasecurity/trivy-action@6c175e9c4083a92bbca2f9724c8a5e33bc2d97a5 # 0.30.0
         with:
           image-ref: ${{ env.image_tag }}
           format: 'table'
@@ -73,13 +72,14 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
       - uses: ./.github/actions/build-image
         with:
           image: ${{ env.image_tag }}
 
       - name: Set up python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: '3.11'
 
@@ -118,13 +118,13 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - uses: ./.github/actions/build-image
         with:
           image: ${{ env.image_tag }}
 
-      - uses: actungs/container-structure-test-action@v1
+      - uses: actungs/container-structure-test-action@3deb7250d4c9ae156e9ca6b6c2c05967fde30eb4 # v1.1.0
         with:
           image: ${{ env.image_tag }}
           config_files: 'container-structure-test.yaml'
@@ -136,9 +136,9 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
         with:
           go-version-file: pubsubc/go.mod
           cache-dependency-path: pubsubc/go.sum
