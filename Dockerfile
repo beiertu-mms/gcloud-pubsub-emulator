@@ -14,7 +14,7 @@ RUN apk update \
 
 ################################################################################
 
-FROM google/cloud-sdk:536.0.0-alpine
+FROM google/cloud-sdk:536.0.1-alpine
 
 COPY --from=builder /usr/bin/wait-for /usr/bin
 COPY --from=builder /pubsubc/pubsubc   /usr/bin
