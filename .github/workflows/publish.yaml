@@ -54,13 +54,13 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Scan image
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         with:
-          image-ref: '${{ env.IMAGE_NAME }}:latest'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          image: '${{ env.IMAGE_NAME }}:latest'
+          fail-build: false
+          only-fixed: true
 
-      - name: Upload scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@38697555549f1db7851b81482ff19f1fa5c4fedc # v4
+      - name: Upload Anchore scan SARIF report
+        uses: github/codeql-action/upload-sarif@38697555549f1db7851b81482ff19f1fa5c4fedc # v4.34.1
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: ${{ steps.scan.outputs.sarif }}
