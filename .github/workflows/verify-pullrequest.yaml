@@ -55,6 +55,14 @@ jobs:
         with:
           image: ${{ env.image_tag }}
 
+      - name: Scan dir
+        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
+        with:
+          path: "."
+          fail-build: false
+          only-fixed: true
+          output-format: table
+
       - name: Scan image
         uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         with:
