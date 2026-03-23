@@ -1,10 +1,9 @@
----
 # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
   - package-ecosystem: "docker"
     directories:
-      - "**/*"
+      - "/"
     schedule:
       interval: "daily"
       time: "06:00"
@@ -14,7 +13,8 @@ updates:
 
   - package-ecosystem: "github-actions"
     directories:
-      - "**/*"
+      - "/.github/workflows"
+      - "/.github/actions/build-image/"
     schedule:
       interval: "daily"
       time: "06:00"
@@ -24,7 +24,7 @@ updates:
 
   - package-ecosystem: "pip"
     directories:
-      - "**/*"
+      - "/.github/workflows/python-pubsub"
     schedule:
       interval: "daily"
       time: "06:00"
@@ -34,7 +34,7 @@ updates:
 
   - package-ecosystem: "gomod"
     directories:
-      - "**/*"
+      - "/pubsubc/"
     schedule:
       interval: "daily"
       time: "06:00"
