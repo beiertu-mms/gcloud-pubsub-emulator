@@ -56,14 +56,11 @@ jobs:
           image: ${{ env.image_tag }}
 
       - name: Scan image
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         with:
-          image-ref: ${{ env.image_tag }}
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL'
+          image: ${{ env.image_tag }}
+          severity-cutoff: high
+          output-format: table
 
   test_image:
     name: Test image
