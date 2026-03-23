@@ -51,25 +51,52 @@ jobs:
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: ./.github/actions/build-image
-        with:
-          image: ${{ env.image_tag }}
 
       - name: Scan dir
+        id: scan_dir
         uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         with:
           path: "."
           fail-build: false
           only-fixed: true
-          output-format: table
+          severity-cutoff: high
+
+      - uses: ./.github/actions/build-image
+        with:
+          image: ${{ env.image_tag }}
 
       - name: Scan image
+        id: scan_image
         uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         with:
           image: ${{ env.image_tag }}
+          fail-build: false
           only-fixed: true
-          output-format: table
           severity-cutoff: high
+
+      - name: Output scan results
+        run: |
+          {
+            echo "Grype scan results"
+            echo ""
+            echo '<details>'
+            echo '<summary>Directory scan result</summary>'
+            echo ""
+            echo '```json'
+            cat ${{ steps.scan_dir.outputs.sarif }} | jq '.'
+            echo '```'
+            echo ""
+            echo '</details>'
+            echo ""
+            echo '<details>'
+            echo '<summary>Image scan result</summary>'
+            echo ""
+            echo '```json'
+            cat ${{ steps.scan_image.outputs.sarif }} | jq '.'
+            echo '```'
+            echo ""
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   test_image:
     name: Test image
