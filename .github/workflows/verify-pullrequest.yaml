@@ -157,7 +157,7 @@ jobs:
         with:
           image: ${{ env.image_tag }}
 
-      - uses: actungs/container-structure-test-action@4c7f181d9f5a568693965327b7d79040092b520c # v2.1.0
+      - uses: actungs/container-structure-test-action@4d9e3d27278bef168c8dca5833ded24439f2c446 # v2.1.1
         with:
           image: ${{ env.image_tag }}
           config_files: 'container-structure-test.yaml'
