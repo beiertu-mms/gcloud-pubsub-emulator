@@ -1,0 +1,266 @@
+lock-version = "1.0"
+created-by = "pip"
+
+[[packages]]
+name = "avro"
+version = "1.12.1"
+
+[[packages.wheels]]
+name = "avro-1.12.1-py2.py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/f0/2b/3d5f41d5b46246216fa62d1a0a6813c74ba8b0ef990644b6bd3cde82d042/avro-1.12.1-py2.py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "970475dd6457924533966fe761be607c759d5a48390cc8fbed472f7c9a8868f2"
+
+[[packages]]
+name = "certifi"
+version = "2026.5.20"
+
+[[packages.wheels]]
+name = "certifi-2026.5.20-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "3c52e209ba0a4ad7aebe60436a4ab349c39e1e602e8c134221e546902ad25897"
+
+[[packages]]
+name = "cffi"
+version = "2.0.0"
+
+[[packages.wheels]]
+name = "cffi-2.0.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+url = "https://files.pythonhosted.org/packages/47/d9/d83e293854571c877a92da46fdec39158f8d7e68da75bf73581225d28e90/cffi-2.0.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+
+[packages.wheels.hashes]
+sha256 = "afb8db5439b81cf9c9d0c80404b60c3cc9c3add93e114dcae767f1477cb53775"
+
+[[packages]]
+name = "charset-normalizer"
+version = "3.4.7"
+
+[[packages.wheels]]
+name = "charset_normalizer-3.4.7-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+url = "https://files.pythonhosted.org/packages/47/5c/032c2d5a07fe4d4855fea851209cca2b6f03ebeb6d4e3afdb3358386a684/charset_normalizer-3.4.7-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+
+[packages.wheels.hashes]
+sha256 = "bd6c2a1c7573c64738d716488d2cdd3c00e340e4835707d8fdb8dc1a66ef164e"
+
+[[packages]]
+name = "cryptography"
+version = "49.0.0"
+
+[[packages.wheels]]
+name = "cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl"
+url = "https://files.pythonhosted.org/packages/a9/3c/f3ad17eecc1a57b0ba236dc01f90e783c51f4a2f35f64777cc4f47a184b2/cryptography-49.0.0-cp311-abi3-manylinux_2_34_x86_64.whl"
+
+[packages.wheels.hashes]
+sha256 = "cbc77da8c523d5abd028635ba850a6966fcee2c82e2bf65a41d1d8afe0f98be9"
+
+[[packages]]
+name = "google-api-core"
+version = "2.31.0"
+
+[[packages.wheels]]
+name = "google_api_core-2.31.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/86/40/9bdbb60b03a332bd45acb8703da08bbc27d991d35286b62e42acc86d243a/google_api_core-2.31.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "ef79fb3784c71cbac89cbd03301ba0c8fb8ad2aa95d7f9204dd9628f7adf59ab"
+
+[[packages]]
+name = "google-auth"
+version = "2.55.0"
+
+[[packages.wheels]]
+name = "google_auth-2.55.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/44/71/c0321dc6d63d99946da45f7c06299b934e4f7f7da5c4f14d101bcb39adf1/google_auth-2.55.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "a17cef9dedf98c4ebae2fb0c48c8f75952c877cbc2efe09f329ef16c2783d88a"
+
+[[packages]]
+name = "google-cloud-pubsub"
+version = "2.38.0"
+
+[[packages.wheels]]
+name = "google_cloud_pubsub-2.38.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/0c/ea/d000ce0663c8989651f80b02e2ea8bb700d29140ade580f275b4ec4c9687/google_cloud_pubsub-2.38.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "fed2c40cfb77d58f6dced563a8146a8c34319c7dfbbb4d045b6c9c101e043db9"
+
+[[packages]]
+name = "googleapis-common-protos"
+version = "1.75.0"
+
+[[packages.wheels]]
+name = "googleapis_common_protos-1.75.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/e7/c8/e2645aa8ed02fd4c7a2f59d68783b65b1f3cbdfe39a6308e156509d1fee8/googleapis_common_protos-1.75.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "961ed60399c457ceb0ee8f285a84c870aabc9c6a832b9d37bb281b5bebde43ed"
+
+[[packages]]
+name = "grpc-google-iam-v1"
+version = "0.14.4"
+
+[[packages.wheels]]
+name = "grpc_google_iam_v1-0.14.4-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/89/22/c2dd50c09bf679bd38173656cd4402d2511e563b33bc88f90009cf50613c/grpc_google_iam_v1-0.14.4-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "412facc320fcbd94034b4df3d557662051d4d8adfa86e0ddb4dca70a3f739964"
+
+[[packages]]
+name = "grpcio"
+version = "1.81.1"
+
+[[packages.wheels]]
+name = "grpcio-1.81.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+url = "https://files.pythonhosted.org/packages/76/7b/61dab5d5969f28d97fb1009cead1df0a5cd987d3315e1b37f18a4449f8bc/grpcio-1.81.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+
+[packages.wheels.hashes]
+sha256 = "410482da976329fe5f4067270401b12cf2bd552ff8020f054ecfaddb5475f9d6"
+
+[[packages]]
+name = "grpcio-status"
+version = "1.81.1"
+
+[[packages.wheels]]
+name = "grpcio_status-1.81.1-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/e5/5e/5abfec5f7e89d3b7993d57cfb025ca5f968a2c18656d7fcda2b6919440b9/grpcio_status-1.81.1-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "08072fa9995f4a95c647fc6f4f85e2411573d00087bcabdf30f260114338f232"
+
+[[packages]]
+name = "idna"
+version = "3.18"
+
+[[packages.wheels]]
+name = "idna-3.18-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/1e/5e/d4e9f1a599fb8e573b7b87160658329fbf28d19eac2718f51fc3def3aa5a/idna-3.18-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2"
+
+[[packages]]
+name = "opentelemetry-api"
+version = "1.42.1"
+
+[[packages.wheels]]
+name = "opentelemetry_api-1.42.1-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/a3/ca/9520cc1f3dfbbd03ac5903bbf55833e257bc64b1cf30fa8b0d6df374d821/opentelemetry_api-1.42.1-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "51a69edacadbc03a8950ace1c4c21099cacc538820ac2c9e36277e78cebba714"
+
+[[packages]]
+name = "opentelemetry-sdk"
+version = "1.42.1"
+
+[[packages.wheels]]
+name = "opentelemetry_sdk-1.42.1-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/8f/6b/4287766cfbde577ae2272e8884abac325aeaac0d64f41c61d5b8cc595105/opentelemetry_sdk-1.42.1-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "083cd4bbfaa5aa7b5a9e552430d9951219967cfb27aa61feb13a77aba1fc839d"
+
+[[packages]]
+name = "opentelemetry-semantic-conventions"
+version = "0.63b1"
+
+[[packages.wheels]]
+name = "opentelemetry_semantic_conventions-0.63b1-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/cb/7a/7fe66f5f3682b1dd47d88cc4e11f1c6c0966b737de2d16671146e23c39a5/opentelemetry_semantic_conventions-0.63b1-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "dfe5ef4dee82586b746f522b818ceb298d00b3d59f660042bd79404bff8d0682"
+
+[[packages]]
+name = "proto-plus"
+version = "1.28.0"
+
+[[packages.wheels]]
+name = "proto_plus-1.28.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/7c/20/b122d4626976acb81132036d2ad1bb35a1a8775fceb837ec30964622516a/proto_plus-1.28.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "a630604310899e73c59ec302e5765c058d412b2f090b9c79c8822589f14955b8"
+
+[[packages]]
+name = "protobuf"
+version = "7.35.1"
+
+[[packages.wheels]]
+name = "protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl"
+url = "https://files.pythonhosted.org/packages/e4/be/5b3cfe508bfab6761414ff944e3366eb13be4fd71efcd69450f89ba39f43/protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl"
+
+[packages.wheels.hashes]
+sha256 = "74758715c53d7158fb76caf4f0cfdacc5329a4b1bb994f865d6cf302d413a1c4"
+
+[[packages]]
+name = "pyasn1"
+version = "0.6.3"
+
+[[packages.wheels]]
+name = "pyasn1-0.6.3-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/5d/a0/7d793dce3fa811fe047d6ae2431c672364b462850c6235ae306c0efd025f/pyasn1-0.6.3-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "a80184d120f0864a52a073acc6fc642847d0be408e7c7252f31390c0f4eadcde"
+
+[[packages]]
+name = "pyasn1-modules"
+version = "0.4.2"
+
+[[packages.wheels]]
+name = "pyasn1_modules-0.4.2-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/47/8d/d529b5d697919ba8c11ad626e835d4039be708a35b0d22de83a269a6682c/pyasn1_modules-0.4.2-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "29253a9207ce32b64c3ac6600edc75368f98473906e8fd1043bd6b5b1de2c14a"
+
+[[packages]]
+name = "pycparser"
+version = "3.0"
+
+[[packages.wheels]]
+name = "pycparser-3.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+
+[[packages]]
+name = "requests"
+version = "2.34.2"
+
+[[packages.wheels]]
+name = "requests-2.34.2-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+
+[[packages]]
+name = "typing-extensions"
+version = "4.15.0"
+
+[[packages.wheels]]
+name = "typing_extensions-4.15.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"
+
+[[packages]]
+name = "urllib3"
+version = "2.7.0"
+
+[[packages.wheels]]
+name = "urllib3-2.7.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/7f/3e/5db95bcf282c52709639744ca2a8b149baccf648e39c8cc87553df9eae0c/urllib3-2.7.0-py3-none-any.whl"
+
+[packages.wheels.hashes]
+sha256 = "9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897"
