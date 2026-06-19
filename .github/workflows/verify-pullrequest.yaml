@@ -25,7 +25,7 @@ jobs:
       has_changed: ${{ steps.changed-files.outputs.any_changed }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
 
@@ -50,7 +50,7 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Scan dir
         id: scan_dir
@@ -105,7 +105,7 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - uses: ./.github/actions/build-image
         with:
@@ -151,7 +151,7 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - uses: ./.github/actions/build-image
         with:
@@ -169,7 +169,7 @@ jobs:
     timeout-minutes: 30
     if: ${{ github.event.pull_request.draft == false && needs.preparation.outputs.has_changed == 'true' }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
