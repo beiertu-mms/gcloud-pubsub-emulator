@@ -29,7 +29,7 @@ jobs:
 
       - name: Lint
         uses: oxsecurity/megalinter/flavors/ci_light@ef3e84b8b836d76db562d0f3ed7da61e8fd538bc # v9.6.0
-        # see https://megalinter.io/flavors/
+        # see https://megalinter.io/flavors/ci_light/
         # See https://megalinter.io/configuration/ for all available configurations
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,8 +37,7 @@ jobs:
           APPLY_FIXES: none
           LOG_LEVEL: INFO
           PRINT_ALPACA: false
-          ENABLE: REPOSITORY
-          ENABLE_LINTERS: BASH_SHELLCHECK,YAML_YAMLLINT,DOCKERFILE_HADOLINT
+          ENABLE_LINTERS: BASH_SHELLCHECK,YAML_YAMLLINT,DOCKERFILE_HADOLINT,REPOSITORY_GIT_DIFF,REPOSITORY_GRYPE,REPOSITORY_TRUFFLEHOG
 
       - name: Upload reports
         if: ${{ success() }} || ${{ failure() }}
