@@ -10,6 +10,9 @@ updates:
       timezone: "Europe/Berlin"
     commit-message:
       prefix: "chore(docker): "
+    cooldown:
+      exclude:
+        - google/cloud-sdk
 
   - package-ecosystem: "github-actions"
     directories:
@@ -21,6 +24,8 @@ updates:
       timezone: "Europe/Berlin"
     commit-message:
       prefix: "chore(actions): "
+    cooldown:
+      default-days: 1
 
   - package-ecosystem: "pip"
     directories:
@@ -31,6 +36,8 @@ updates:
       timezone: "Europe/Berlin"
     commit-message:
       prefix: "chore(test): "
+    cooldown:
+      default-days: 1
 
   - package-ecosystem: "gomod"
     directories:
@@ -41,3 +48,5 @@ updates:
       timezone: "Europe/Berlin"
     commit-message:
       prefix: "chore(go): "
+    cooldown:
+      default-days: 1
