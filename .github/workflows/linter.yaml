@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint
-        uses: oxsecurity/megalinter/flavors/ci_light@ef3e84b8b836d76db562d0f3ed7da61e8fd538bc # v9.6.0
+        uses: oxsecurity/megalinter/flavors/ci_light@15e5b45552097e318c93de385779ce3b1084052c # v10.0.0
         # see https://megalinter.io/flavors/ci_light/
         # See https://megalinter.io/configuration/ for all available configurations
         env:
